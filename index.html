@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="global.css">
+    </head>
+
+    <body>
+        <div>
+            <ul>    
+                <li>
+                    <div class="button" id="newOrder">
+                        <h1>New Order</h1>
+                    </div>
+                </li>
+                <li>
+                    <div class="button" id="outOfTown">
+                        <h1>Out of Town</h1>
+                    </div>
+                </li>
+                <li>
+                    <div class="button" id="inTown">
+                        <h1>In Town</h1>
+                    </div>
+                </li>
+                <li>
+                    <div class="button" id="cashTip">
+                        <h1>Cash Tip</h1>
+                        <input type="text" placeholder="Tip $" id="cashTipInput">
+                        <button type="button" onclick="cashTip();">Submit</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="button" id="cardTip">
+                        <h1>Card Tip</h1>
+                        <input type="text" placeholder="Tip $" id="cardTipInput">
+                        <button type="button" onclick="cardTip();">Submit</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <h1 id="shiftSummary">Shift Summary</h1>
+        
+            <table style="width:100%">
+                <tr>
+                <th>Total Deliveries</th>
+                <th>Out of Town Orders</th>
+                <th>In Town Orders</th>
+                <th>Cash Tip Total</th>
+                <th>Card Tip Total</th>
+                <th>Tip Total</th>
+                </tr>
+                <tr>
+                <td id="totalDeliveries">0</td>
+                <td id="outOfTownOrders">0</td>
+                <td id="inTownOrders">0</td>
+                <td id="cashTipTotal">0</td>
+                <td id="cardTipTotal">0</td>
+                <td id="tipTotal">0</td>
+                </tr>
+            </table>
+
+            <div>
+                <h3>Starting Miles: </h3><p id="startingMiles">0</p>
+                <h3>Ending Miles: </h3><p id="endingMiles">0</p>
+                <h3>Miles Used During Shift: </h3><p id="totalMiles">0</p>
+            </div>
+
+            <div>
+                <ul>
+                    <li>
+                        <div id="startShift">
+                            <h3>Start Shift</h3>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="endShift">
+                            <h3>End Shift</h3>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        <script type="text/javascript" src="logic.js"></script>
+    </body>
+
+</html>
