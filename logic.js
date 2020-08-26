@@ -179,18 +179,28 @@ var display = {
             var inputValue = prompt("Please enter your cars mile range at the START of your shift.")
             var inputValueInt = parseFloat(inputValue);
 
-            shiftSummary.startingMiles = inputValueInt;
+                if(inputValue) {
+                    shiftSummary.startingMiles = inputValueInt;
 
-            startingMilesElement.innerHTML = inputValueInt;
+                    startingMilesElement.innerHTML = inputValueInt;
+                } else {
+                    console.log("Invalid entry on STARTSHIFT");
+                }
+
        } else if(button == "endShift") {
            var inputValue = prompt("Please enter your cars mile range at the END of your shift.");
            var inputValueInt = parseFloat(inputValue);
 
-           shiftSummary.endingMiles = inputValueInt;
-           shiftSummary.totalMiles = shiftSummary.startingMiles - shiftSummary.endingMiles;
+           if(inputValue) {
+            shiftSummary.endingMiles = inputValueInt;
+            shiftSummary.totalMiles = shiftSummary.startingMiles - shiftSummary.endingMiles;
+ 
+            endingMilesElement.innerHTML = inputValueInt;
+            totalMilesElement.innerHTML = shiftSummary.startingMiles - shiftSummary.endingMiles;
+           } else {
+               console.log("Invalid entry on ENDSHIFT");
+           }
 
-           endingMilesElement.innerHTML = inputValueInt;
-           totalMilesElement.innerHTML = shiftSummary.startingMiles - shiftSummary.endingMiles;
        } else {
            console.log("why is this being logged");
      }
