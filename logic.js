@@ -16,8 +16,6 @@ var shiftSummary = {
 
 function init() {
 
-    //localStorage.clear();
-
 if(!localStorage.getItem('shiftSummary')) {
         localStorage.setItem('shiftSummary', JSON.stringify({
             
@@ -57,8 +55,6 @@ if(!localStorage.getItem('shiftSummary')) {
     shiftSummary.endingMiles = parsedShiftSummary.endingMiles
     shiftSummary.totalMiles = parsedShiftSummary.totalMiles
 
-    //console.log(shiftSummary.cardTipTotal);
-
     cardTipTotalElement.innerHTML = parsedShiftSummary.cardTipTotal
     tipTotalElement.innerHTML = parsedShiftSummary.tipTotal
     cashTipTotalElement.innerHTML = parsedShiftSummary.cashTipTotal
@@ -71,7 +67,6 @@ if(!localStorage.getItem('shiftSummary')) {
 
 
     console.log(shiftSummary);
-    //console.log(parsedShiftSummary.cardTipTotal);
 }
 
     var newOrder = document.getElementById("newOrder");
@@ -97,24 +92,23 @@ if(!localStorage.getItem('shiftSummary')) {
 
 function cashTip() {
     var cashTipTotalElement = document.getElementById("cashTipTotal");
-    var cashTipTotal = parseFloat(cashTipTotalElement.innerHTML);
 
     var inputVal = document.getElementById("cashTipInput").value;
     var cashTipVal = parseFloat(inputVal);
 
     var tipTotalElement = document.getElementById("tipTotal");
-    var tipTotal = parseFloat(tipTotalElement.innerHTML);
 
     if(inputVal.length < 1) {
-        alert("Please enter a tip amount")
+        alert("Please enter a tip amount");
     }
 
+    //Using math.round here prevents extremely long decimals from being created within the shift summary table.
     else {
-        cashTipTotalElement.innerHTML = shiftSummary.cashTipTotal + cashTipVal;
-        tipTotalElement.innerHTML = shiftSummary.tipTotal + cashTipVal;
+        cashTipTotalElement.innerHTML = Math.round((shiftSummary.cashTipTotal + cashTipVal) * 100) / 100;
+        tipTotalElement.innerHTML = Math.round((shiftSummary.tipTotal + cashTipVal) * 100) / 100;
 
-        shiftSummary.cashTipTotal = shiftSummary.cashTipTotal + cashTipVal
-        shiftSummary.tipTotal = shiftSummary.tipTotal + cashTipVal
+        shiftSummary.cashTipTotal = Math.round((shiftSummary.cashTipTotal + cashTipVal) * 100) / 100;
+        shiftSummary.tipTotal = Math.round((shiftSummary.tipTotal + cashTipVal) * 100) / 100;
 
         localStorage.setItem('shiftSummary', JSON.stringify(shiftSummary));
 
@@ -135,19 +129,15 @@ function cardTip() {
     }
 
     else {
-        cardTipTotalElement.innerHTML = shiftSummary.cardTipTotal + cardTipVal;
-        tipTotalElement.innerHTML = shiftSummary.tipTotal + cardTipVal;
+        cardTipTotalElement.innerHTML = Math.round((shiftSummary.cardTipTotal + cardTipVal) * 100) / 100;
+        tipTotalElement.innerHTML = Math.round((shiftSummary.tipTotal + cardTipVal) * 100) / 100;
 
-        shiftSummary.cardTipTotal = shiftSummary.cardTipTotal + cardTipVal
-        shiftSummary.tipTotal = shiftSummary.tipTotal + cardTipVal
+        shiftSummary.cardTipTotal = Math.round((shiftSummary.cardTipTotal + cardTipVal) * 100) / 100;
+        shiftSummary.tipTotal = Math.round((shiftSummary.tipTotal + cardTipVal) * 100) / 100;
 
         localStorage.setItem('shiftSummary', JSON.stringify(shiftSummary));
 
         document.getElementById("cardTipInput").value = "";
-        //console.log(shiftSummary);
-        //console.log(cardTipVal);
-        //console.log(shiftSummary.cardTipTotal);
-        // Above I'm assigning the shift value.  I need to add it to the cardtipval, and assign it seperately!
     }
 }
 
@@ -155,28 +145,36 @@ var display = {
 
     handleButtons: function(button) {
        var totalDeliveriesElement = document.getElementById("totalDeliveries");
-
        var inTownOrdersElement = document.getElementById("inTownOrders");
-       var inTownOrders = parseFloat(inTownOrdersElement.innerHTML);
-
        var outOfTownOrdersElement = document.getElementById("outOfTownOrders");
-       var outOfTownOrders = parseFloat(outOfTownOrdersElement.innerHTML);
-
        var startingMilesElement = document.getElementById("startingMiles");
-       var startingMiles = parseFloat(startingMilesElement.innerHTML);
-
        var endingMilesElement = document.getElementById("endingMiles");
-       var endingMiles = parseFloat(endingMilesElement.innerHTML);
-
        var totalMilesElement = document.getElementById("totalMiles");
-       var totalMiles = parseFloat(totalMilesElement.innerHTML);
+       
+       var toastInTown = document.getElementById("toastInTown");
+       var toastOutOfTown = document.getElementById("toastOutOfTown");
+
    
        if (button == "newOrder") {
             totalDeliveriesElement.innerHTML = shiftSummary.totalDeliveries += 1;
        } else if (button == "inTown") {
             inTownOrdersElement.innerHTML = shiftSummary.inTownOrders += 1;
+
+            toastInTown.innerHTML = "+1 to In Town Order"
+            toastInTown.className = "show";
+
+            setTimeout(function() {
+                toastInTown.className = toastInTown.className.replace("show", "");
+            }, 3000);
        } else if (button == "outOfTown") {
             outOfTownOrdersElement.innerHTML = shiftSummary.outOfTownOrders += 1;
+
+            toastOutOfTown.innerHTML = "+1 to Out of Town Order"
+            toastOutOfTown.className = "show";
+
+            setTimeout(function() {
+                toastOutOfTown.className = toastOutOfTown.className.replace("show", "");
+            }, 3000);
        } else if(button == "startShift") {
             var inputValue = prompt("Please enter your cars mile range at the START of your shift.")
             var inputValueInt = parseFloat(inputValue);
@@ -205,14 +203,10 @@ var display = {
         } else {
             console.log("weewees");
         }
-    } else {
+    }
+    
+    else {
         console.log("weewees")
     }
    }
 }
-
-            //localStorage.clear()
-            //localStorage.setItem('myCat', 'Tom');
-
-            //var cat = localStorage.getItem('myCat');
-            //alert(cat);
