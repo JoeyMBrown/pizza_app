@@ -113,6 +113,11 @@ function cashTip() {
         localStorage.setItem('shiftSummary', JSON.stringify(shiftSummary));
 
         document.getElementById("cashTipInput").value = "";
+
+        //Temporary way to keep track of what buttons were pressed
+        document.getElementById("newOrder").classList = "button";
+        document.getElementById("outOfTown").classList = "button";
+        document.getElementById("inTown").classList = "button";
     }
 }
 
@@ -138,6 +143,11 @@ function cardTip() {
         localStorage.setItem('shiftSummary', JSON.stringify(shiftSummary));
 
         document.getElementById("cardTipInput").value = "";
+
+        //Temporary way to keep track of what buttons were pressed
+        document.getElementById("newOrder").classList = "button";
+        document.getElementById("outOfTown").classList = "button";
+        document.getElementById("inTown").classList = "button";
     }
 }
 
@@ -157,11 +167,17 @@ var display = {
    
        if (button == "newOrder") {
             totalDeliveriesElement.innerHTML = shiftSummary.totalDeliveries += 1;
+            
+            //Temporary for now, makes it more clear which buttons were pressed or not
+            document.getElementById("newOrder").classList = "button clicked";
        } else if (button == "inTown") {
             inTownOrdersElement.innerHTML = shiftSummary.inTownOrders += 1;
 
             toastInTown.innerHTML = "+1 to In Town Order"
             toastInTown.className = "show";
+
+            //Temporary for now, makes it more clear which buttons were pressed or not
+            document.getElementById("inTown").classList = "button clicked";
 
             setTimeout(function() {
                 toastInTown.className = toastInTown.className.replace("show", "");
@@ -171,6 +187,9 @@ var display = {
 
             toastOutOfTown.innerHTML = "+1 to Out of Town Order"
             toastOutOfTown.className = "show";
+
+            //Temporary for now, makes it more clear which buttons were pressed or not
+            document.getElementById("outOfTown").classList = "button clicked";
 
             setTimeout(function() {
                 toastOutOfTown.className = toastOutOfTown.className.replace("show", "");
